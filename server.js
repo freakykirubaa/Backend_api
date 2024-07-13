@@ -1,9 +1,10 @@
 const express = require("express");
 const axios = require("axios");
 const cors = require("cors");
+require('dotenv').config();
 
 const app = express();
-const port = 4000;
+const port = process.env.PORT; 
 
 app.use(express.json());
 app.use(cors()); 
@@ -49,13 +50,12 @@ app.post("/api/search", async (req, res) => {
       headers,
     });
 
-   
-
     res.status(200).json(response.data);
   } catch (error) {
     res.status(500).json({ error: error.message });
   }
 });
+
 app.listen(port, () => {
   console.log(`Server running at http://localhost:${port}`);
 });
